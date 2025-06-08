@@ -1,0 +1,43 @@
+.filterContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.notesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.note {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+}
+
+.dateTitle {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+}
+
+.noteText {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  border: none !important;
+  outline: none !important;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}

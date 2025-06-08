@@ -1,8 +1,15 @@
-<main class="mainContainer">
-  <app-header>    
-  </app-header>
-  <app-content>    
-  </app-content>
-  <app-footer>
-  </app-footer>
+<main class="mainContainer themed-box">
+  <header>
+    <h1 class="mainTitle">Notebook</h1>
+    <label class="switch">
+      <input
+        type="checkbox"
+        [(ngModel)]="darkMode"
+        (change)="toggleTheme(darkMode)"
+      />
+      <span class="slider round"></span>
+    </label>
+  </header>
+  <app-addNote></app-addNote>
+  <app-notes></app-notes>
 </main>

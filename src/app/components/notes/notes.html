@@ -1,0 +1,36 @@
+<div class="filterContainer">
+  <input type="text" placeholder="Поиск по заголовкам" />
+  <mat-form-field appearance="fill">
+    <mat-label>Выборка по диапазону дат</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input
+        matStartDate
+        placeholder="Начальная дата"
+        [(ngModel)]="dateRange.start"
+        name="startDate"
+      />
+      <input
+        matEndDate
+        placeholder="Конечная дата"
+        [(ngModel)]="dateRange.end"
+        name="endDate"
+      />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+</div>
+<div class="notesContainer">
+  <div class="note" *ngFor="let note of notes" id="{{ note.id }}">
+    <div class="dateTitle">
+      <p>{{ note.title }}</p>
+      <p>{{ note.date }}</p>
+    </div>
+    <div class="noteText">
+      <textarea id="growing-textarea" [value]="note.text" readonly></textarea>
+    </div>
+    <div class="noteButtons">
+      <button (click)="deleteNote(note.id)">Удалить</button>
+    </div>
+  </div>
+</div>

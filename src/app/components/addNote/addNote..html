@@ -1,0 +1,10 @@
+<div class="inputTitle">
+  <input type="text" placeholder="Введите заголовок" />
+  <div class="date">{{ currentDate }}</div>
+</div>
+<textarea
+  id="growing-textarea"
+  (input)="resizeTextarea($event)"
+  placeholder="Введите заметку"
+></textarea>
+<button>Добавить</button>

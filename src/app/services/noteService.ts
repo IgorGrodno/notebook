@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { note } from '../interfaces/note.interface';
 import { searchCriteries } from '../interfaces/searchCriteries.interface';
+import { notesPage } from '../interfaces/notesPage.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class NoteService {
       }
     }
 
-    return this.http.get<note[]>(url);
+    return this.http.get<notesPage>(url);
   }
 
   addNote(note: note) {
