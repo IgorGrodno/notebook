@@ -10,7 +10,7 @@ import { notesPage } from '../interfaces/notesPage.interface';
 export class NoteService {
   constructor(private http: HttpClient) {}
 
-  private noteUrl = 'fakeDB/notes.json';
+  private noteUrl = 'http://localhost:8080/api/notes';
 
   getNotesPage(
     pageNumber: number,
@@ -35,6 +35,7 @@ export class NoteService {
   }
 
   addNote(note: note) {
+    console.log('Adding note:', note);
     return this.http.post<note>(this.noteUrl, note);
   }
 }
