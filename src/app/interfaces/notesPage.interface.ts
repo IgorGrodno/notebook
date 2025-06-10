@@ -1,7 +1,7 @@
-import { note } from './note.interface';
+import { Note } from './note.interface';
 
-export interface notesPage {
-  notes: note[];
+export interface NotesPage {
+  notes: Note[];
   toalNotes: number;
   pageSize: number;
   pageIndex: number;

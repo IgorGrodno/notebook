@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NoteService } from '../../services/noteService';
-import { note } from '../../interfaces/note.interface';
+import { Note } from '../../interfaces/note.interface';
 
 @Component({
   selector: 'app-addNote',
@@ -30,7 +30,7 @@ export class AddNote {
       return;
     }
 
-    const note: note = {
+    const note: Note = {
       id: 0, // id генерируется на сервере
       date: new Date().toISOString(),
       title: this.noteTitle,

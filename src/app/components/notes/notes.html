@@ -1,5 +1,11 @@
 <div class="filterContainer">
-  <input type="text" placeholder="Поиск по заголовкам" />
+  <input
+    type="text"
+    placeholder="Поиск по заголовкам"
+    [(ngModel)]="title"
+    name="title"
+  />
+
   <mat-form-field appearance="fill">
     <mat-label>Выборка по диапазону дат</mat-label>
     <mat-date-range-input [rangePicker]="picker">
@@ -20,14 +26,22 @@
     <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
 </div>
+
+<button (click)="applyFilters()">Фильтровать</button>
+
 <div class="notesContainer">
-  <div class="note" *ngFor="let note of notes" id="{{ note.id }}">
+  <div class="pagination-buttons">
+    <button (click)="prevPage()" [disabled]="page === 0">← Назад</button>
+    <span>Страница {{ page + 1 }}</span>
+    <button (click)="nextPage()">Вперед →</button>
+  </div>
+  <div class="note" *ngFor="let note of notes" [attr.id]="note.id">
     <div class="dateTitle">
       <p>{{ note.title }}</p>
-      <p>{{ note.date }}</p>
+      <p>{{ note.date | date: 'short' }}</p>
     </div>
-    <div class="noteText">
-      <textarea id="growing-textarea" [value]="note.text" readonly></textarea>
+    <div class="noteText" (dblclick)="editNote(note.id)">
+      <p>{{note.text}}</p>
     </div>
     <div class="noteButtons">
       <button (click)="deleteNote(note.id)">Удалить</button>

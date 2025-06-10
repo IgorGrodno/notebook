@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Редактировать заметку</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Заголовок</mat-label>
+    <input matInput [(ngModel)]="data.title" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Текст</mat-label>
+    <textarea matInput rows="5" [(ngModel)]="data.text"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">Отмена</button>
+  <button mat-button color="primary" (click)="closeDialog()">Сохранить</button>
+</mat-dialog-actions>

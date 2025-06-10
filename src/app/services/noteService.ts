@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { note } from '../interfaces/note.interface';
-import { searchCriteries } from '../interfaces/searchCriteries.interface';
-import { notesPage } from '../interfaces/notesPage.interface';
+import { Note } from '../interfaces/note.interface';
+import { NotesPage } from '../interfaces/notesPage.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,27 +14,36 @@ export class NoteService {
   getNotesPage(
     pageNumber: number,
     pageSize: number,
-    searchCriteries?: searchCriteries
+    title?: string,
+    startDateStr?: string,
+    endDateStr?: string
   ) {
     let url = `${this.noteUrl}?page=${pageNumber}&size=${pageSize}`;
 
-    if (searchCriteries) {
-      if (searchCriteries.searchText) {
-        url += `&title=${encodeURIComponent(searchCriteries.searchText)}`;
-      }
-      if (searchCriteries.startDate) {
-        url += `&startDate=${searchCriteries.startDate.toISOString()}`;
-      }
-      if (searchCriteries.endDate) {
-        url += `&endDate=${searchCriteries.endDate.toISOString()}`;
-      }
+    if (title) {
+      url += `&title=${encodeURIComponent(title)}`;
     }
 
-    return this.http.get<notesPage>(url);
+    if (startDateStr) {
+      url += `&startDate=${startDateStr}`;
+    }
+    if (endDateStr) {
+      url += `&endDate=${endDateStr}`;
+    }
+
+    return this.http.get<NotesPage>(url);
   }
 
-  addNote(note: note) {
+  addNote(note: Note) {
     console.log('Adding note:', note);
-    return this.http.post<note>(this.noteUrl, note);
+    return this.http.post<Note>(this.noteUrl, note);
+  }
+
+  deleteNote(id: number) {
+    return this.http.delete(`${this.noteUrl}/${id}`);
+  }
+
+  updateNote(note: Note) {
+    return this.http.put<Note>(`${this.noteUrl}/${note.id}`, note);
   }
 }
