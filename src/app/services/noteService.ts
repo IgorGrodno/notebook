@@ -19,18 +19,15 @@ export class NoteService {
     endDateStr?: string
   ) {
     let url = `${this.noteUrl}?page=${pageNumber}&size=${pageSize}`;
-
     if (title) {
       url += `&title=${encodeURIComponent(title)}`;
     }
-
     if (startDateStr) {
       url += `&startDate=${startDateStr}`;
     }
     if (endDateStr) {
       url += `&endDate=${endDateStr}`;
     }
-
     return this.http.get<NotesPage>(url);
   }
 

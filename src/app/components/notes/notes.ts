@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -25,20 +31,20 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class Notes {
   page: number = 0;
-  title: string = '';
-  dateRange = {
+  @Input() title: string = '';
+  @Input() dateRange = {
     start: null as Date | null,
     end: null as Date | null,
   };
   notes: Note[] = [];
   totalPages: number = 0;
   dialog: MatDialog = inject(MatDialog);
+  noteService: NoteService = inject(NoteService);
 
   editNote(id: number) {
     const noteToEdit = this.notes.find((note) => note.id === id);
     console.log('Editing note:', noteToEdit);
     if (!noteToEdit) return;
-
     const dialogRef = this.dialog.open(EditNote, {
       width: '400px',
       data: {
@@ -46,7 +52,6 @@ export class Notes {
         text: noteToEdit.text,
       },
     });
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         const updatedNote = {
@@ -68,7 +73,6 @@ export class Notes {
     const endDateStr = this.dateRange.end
       ? this.dateRange.end.toISOString()
       : undefined;
-
     this.noteService
       .getNotesPage(this.page, 10, this.title, startDateStr, endDateStr)
       .subscribe((data) => {
@@ -104,8 +108,6 @@ export class Notes {
       });
     }
   }
-
-  noteService: NoteService = inject(NoteService);
 
   ngOnInit() {
     this.applyFilters();

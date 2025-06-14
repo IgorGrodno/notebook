@@ -14,7 +14,6 @@ import { Note } from '../../interfaces/note.interface';
 })
 export class AddNote {
   noteService = inject(NoteService);
-
   currentDate: string = '';
   noteTitle: string = '';
   noteText: string = '';
@@ -31,7 +30,7 @@ export class AddNote {
     }
 
     const note: Note = {
-      id: 0, // id генерируется на сервере
+      id: 0,
       date: new Date().toISOString(),
       title: this.noteTitle,
       text: this.noteText,
