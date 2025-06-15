@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NoteService } from '../../services/noteService';
-import { Note } from '../../interfaces/note.interface';
+import { NoteService } from '../../../services/noteService';
+import { Note } from '../../../interfaces/note.interface';
 
 @Component({
   selector: 'app-addNote',

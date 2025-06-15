@@ -1,6 +1,26 @@
 <main class="mainContainer themed-box">
   <header>
     <h1 class="mainTitle">Notebook</h1>
+
+    <div class="headerItems">
+      <div class="leftHeaderItems">
+        @if(isAuth){
+        <ul class="nav">
+          @if(curentUser.username==='admin'){
+          <li><a href="admin">adminPage</a></li>
+          }
+          <li><a href="main">WorkshopS</a></li>
+        </ul>
+        }
+      </div>
+      @if(isAuth){
+      <div class="curentUserItems">
+        <div class="curentUser">you are loged like:{{curentUser.username}}</div>
+        <div class="logout" (click)="logOut()">logout</div>
+      </div>
+      }
+    </div>
+
     <label class="switch">
       <input
         type="checkbox"
@@ -10,6 +30,5 @@
       <span class="slider round"></span>
     </label>
   </header>
-  <app-addNote></app-addNote>
-  <app-notes></app-notes>
+  <router-outlet></router-outlet>
 </main>

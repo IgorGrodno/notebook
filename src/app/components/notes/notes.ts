@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  inject,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -15,6 +9,7 @@ import { Note } from '../../interfaces/note.interface';
 import { NoteService } from '../../services/noteService';
 import { EditNote } from '../edit-note/edit-note';
 import { MatDialog } from '@angular/material/dialog';
+import { AddNote } from './addNote/addNote';
 
 @Component({
   selector: 'app-notes',
@@ -25,6 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
     MatNativeDateModule,
     CommonModule,
     FormsModule,
+    AddNote,
   ],
   templateUrl: './notes.html',
   styleUrl: './notes.css',

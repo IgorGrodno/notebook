@@ -1,0 +1,59 @@
+import { Component, inject } from '@angular/core';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from '../../services/Auth.service';
+
+@Component({
+  selector: 'app-registration',
+  imports: [ReactiveFormsModule],
+  templateUrl: './registration.html',
+  styleUrl: './registration.css',
+})
+export class Registration {
+  form: FormGroup = new FormGroup({
+    username: new FormControl(null, Validators.required),
+    email: new FormControl(null, Validators.required),
+    password: new FormControl(null, Validators.required),
+    adminrole: new FormControl(),
+  });
+
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+
+  authService: AuthService = inject(AuthService);
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      const rolesarr = ['user'];
+      if (this.form.get('adminrole')?.value === true) {
+        rolesarr.push('admin');
+      }
+      this.authService
+        .register({
+          username: this.form.get('username')?.value,
+          email: this.form.get('email')?.value,
+          password: this.form.get('password')?.value,
+          role: rolesarr,
+        })
+        .subscribe({
+          next: (data) => {
+            console.log(data);
+            this.isSuccessful = true;
+            this.isSignUpFailed = false;
+            window.location.reload();
+          },
+          error: (err) => {
+            this.errorMessage = err.error.message;
+            this.isSignUpFailed = true;
+          },
+        });
+    } else {
+      alert('данные введены некоректно');
+    }
+  }
+}
