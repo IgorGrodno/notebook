@@ -30,9 +30,11 @@
 </div>
 
 <div class="pagination-buttons">
-  <button (click)="prevPage()" [disabled]="page === 0">← Назад</button>
+  <button class="navigationButton" (click)="prevPage()" [disabled]="page === 0">
+    ←
+  </button>
   <span>Страница {{ page + 1 }}</span>
-  <button (click)="nextPage()">Вперед →</button>
+  <button class="navigationButton" (click)="nextPage()">→</button>
 </div>
 
 <div class="notesContainer">
