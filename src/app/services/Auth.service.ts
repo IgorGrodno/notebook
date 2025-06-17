@@ -30,4 +30,16 @@ export class AuthService {
       .post(this.authUrl + '/signout', {}, httpOptions)
       .pipe(tap(() => this.storageService.clean()));
   }
+
+  register(pauload: {
+    username: string;
+    email: string;
+    password: string;
+  }): Observable<any> {
+    return this.http.post(
+      this.authUrl + '/newuserregister',
+      pauload,
+      httpOptions
+    );
+  }
 }

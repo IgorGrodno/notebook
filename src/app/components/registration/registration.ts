@@ -27,5 +27,18 @@ export class Registration {
 
   authService: AuthService = inject(AuthService);
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    this.authService.register(this.form.value).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.isSignUpFailed = true;
+        this.errorMessage = err.error.message;
+      },
+    });
+  }
 }
