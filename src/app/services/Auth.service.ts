@@ -4,6 +4,13 @@ import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
 
+interface RegisterResponse {
+  success: boolean;
+  message: string;
+  errorCode?: string;
+  username?: string;
+}
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
@@ -35,8 +42,8 @@ export class AuthService {
     username: string;
     email: string;
     password: string;
-  }): Observable<any> {
-    return this.http.post(
+  }): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(
       this.authUrl + '/newuserregister',
       pauload,
       httpOptions

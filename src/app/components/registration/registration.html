@@ -1,26 +1,22 @@
 <form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h1>Регистрация</h1>
-
   <input
     formControlName="username"
     class="login-input"
     type="text"
     placeholder="Введите логин"
   />
-
   <input
     formControlName="email"
     class="login-input"
     type="text"
     placeholder="Введите email"
   />
-
   <input
     formControlName="password"
     class="login-input"
     type="text"
     placeholder="Введите пароль"
   />
-
   <button type="submit">Регистрация</button>
 </form>

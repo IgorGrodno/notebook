@@ -40,7 +40,6 @@ export class Notes {
 
   editNote(id: number) {
     const noteToEdit = this.notes.find((note) => note.id === id);
-    console.log('Editing note:', noteToEdit);
     if (!noteToEdit) return;
     const dialogRef = this.dialog.open(EditNote, {
       width: '400px',
@@ -95,7 +94,6 @@ export class Notes {
   deleteNote(noteId: number) {
     const note = document.getElementById(noteId.toString());
     if (!note) {
-      console.error(`Note with ID ${noteId} not found.`);
       return;
     }
     if (note) {
@@ -127,7 +125,6 @@ export class Notes {
 
     this.noteService.addNote(note).subscribe({
       next: (response) => {
-        console.log('Note added successfully:', response);
         this.noteTitle = '';
         this.noteText = '';
       },

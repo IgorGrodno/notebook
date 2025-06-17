@@ -1,24 +1,14 @@
 <main class="mainContainer themed-box">
   <header>
-    <h1 class="mainTitle">Notebook</h1>
-    <div class="headerItems">
-      <div class="leftHeaderItems">
-        @if(isAuth){
-        <ul class="nav">
-          @if(curentUser.username==='admin'){
-          <li><a href="admin">adminPage</a></li>
-          }
-          <li><a href="main">WorkshopS</a></li>
-        </ul>
-        }
-      </div>
-      @if(isAuth){
-      <div class="curentUserItems">
-        <div class="curentUser">you are loged like:{{curentUser.username}}</div>
-        <div class="logout" (click)="logOut()">logout</div>
-      </div>
-      }
+    <a href=""> <h1 class="mainTitle">Notebook</h1></a>
+    @if(curentUser.username==='admin'){
+    <a href="adminPage">adminPage</a>
+    } @if(isAuth){
+    <div class="curentUserItems">
+      <div class="curentUser">you are loged like: {{curentUser.username}}</div>
+      <div class="logout" (click)="logOut()">logout</div>
     </div>
+    }
     <label class="switch">
       <input
         type="checkbox"

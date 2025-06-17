@@ -10,7 +10,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if (err.status === 401) {
         router.navigate(['/login']);
       }
-      return throwError(() => new Error('Unauthorized Exception'));
+      return throwError(() => err);
     })
   );
 };

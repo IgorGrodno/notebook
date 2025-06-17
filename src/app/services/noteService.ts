@@ -32,7 +32,6 @@ export class NoteService {
   }
 
   addNote(note: Note) {
-    console.log('Adding note:', note);
     return this.http.post<Note>(this.noteUrl, note);
   }
 
