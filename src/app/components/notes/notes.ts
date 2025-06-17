@@ -9,7 +9,6 @@ import { Note } from '../../interfaces/note.interface';
 import { NoteService } from '../../services/noteService';
 import { EditNote } from '../edit-note/edit-note';
 import { MatDialog } from '@angular/material/dialog';
-import { AddNote } from './addNote/addNote';
 
 @Component({
   selector: 'app-notes',
@@ -20,7 +19,6 @@ import { AddNote } from './addNote/addNote';
     MatNativeDateModule,
     CommonModule,
     FormsModule,
-    AddNote,
   ],
   templateUrl: './notes.html',
   styleUrl: './notes.css',
@@ -36,6 +34,9 @@ export class Notes {
   totalPages: number = 0;
   dialog: MatDialog = inject(MatDialog);
   noteService: NoteService = inject(NoteService);
+  currentDate: string = '';
+  noteTitle: string = '';
+  noteText: string = '';
 
   editNote(id: number) {
     const noteToEdit = this.notes.find((note) => note.id === id);
@@ -107,5 +108,53 @@ export class Notes {
 
   ngOnInit() {
     this.applyFilters();
+    this.updateDate();
+    setInterval(() => this.updateDate(), 60000);
+  }
+
+  addNote() {
+    if (!this.noteTitle.trim() || !this.noteText.trim()) {
+      alert('Пожалуйста, заполните заголовок и текст заметки');
+      return;
+    }
+
+    const note: Note = {
+      id: 0,
+      date: new Date().toISOString(),
+      title: this.noteTitle,
+      text: this.noteText,
+    };
+
+    this.noteService.addNote(note).subscribe({
+      next: (response) => {
+        console.log('Note added successfully:', response);
+        this.noteTitle = '';
+        this.noteText = '';
+      },
+      error: (error) => {
+        console.error('Error adding note:', error);
+      },
+    });
+  }
+
+  updateDate() {
+    const date = new Date();
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+    this.currentDate = date.toLocaleString('ru-RU', options);
+  }
+
+  resizeTextarea(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto';
+    const newHeight = textarea.scrollHeight;
+    const step = 50;
+    const adjustedHeight = Math.ceil(newHeight / step) * step;
+    textarea.style.height = `${adjustedHeight}px`;
   }
 }

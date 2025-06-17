@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.roles = this.storageService.getUser().roles;
-      this.router.navigate(['/main']);
+      this.router.navigate(['']);
     }
   }
 

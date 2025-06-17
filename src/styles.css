@@ -424,6 +424,10 @@ a {
 html,
 body {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 body {
   margin: 0;

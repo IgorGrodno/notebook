@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { AddNote } from './components/notes/addNote/addNote';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Notes } from './components/notes/notes';

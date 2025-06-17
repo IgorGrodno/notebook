@@ -1,4 +1,26 @@
-<app-addNote></app-addNote>
+<div class="wrapper">
+  <div class="inputTitle">
+    <input
+      type="text"
+      placeholder="Введите заголовок"
+      [(ngModel)]="noteTitle"
+      name="noteTitle"
+    />
+    <div class="date">{{ currentDate }}</div>
+  </div>
+
+  <textarea
+    id="growing-textarea"
+    #noteTextarea
+    [(ngModel)]="noteText"
+    name="noteText"
+    (input)="resizeTextarea($event)"
+    placeholder="Введите заметку"
+  ></textarea>
+
+  <button (click)="addNote()">Добавить</button>
+</div>
+
 <div class="filterContainer">
   <input
     type="text"
