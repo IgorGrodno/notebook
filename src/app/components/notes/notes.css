@@ -112,3 +112,8 @@ button {
   background-color: #007bff;
   z-index: 100;
 }
+
+p {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -16,7 +16,7 @@ import { StorageService } from '../../services/storage.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   router: Router = inject(Router);
 
   form: FormGroup = new FormGroup({
@@ -34,14 +34,6 @@ export class LoginPageComponent implements OnInit {
     private storageService: StorageService
   ) {}
 
-  ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().roles;
-      this.router.navigate(['']);
-    }
-  }
-
   onSubmit(): void {
     this.authService.login(this.form.value).subscribe({
       next: (data) => {
@@ -49,12 +41,12 @@ export class LoginPageComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
-        this.reloadPage();
+        this.router.navigate(['']);
       },
       error: (err) => {
-        this.errorMessage = err.error.message;
+        console.error('Login error:', err);
         this.isLoginFailed = true;
-        this.reloadPage();
+        alert('Неверный логин или пароль. Пожалуйста, попробуйте еще раз.');
       },
     });
   }

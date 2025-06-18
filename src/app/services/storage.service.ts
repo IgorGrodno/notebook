@@ -34,4 +34,9 @@ export class StorageService {
   public getUserId(): string | null {
     return window.sessionStorage.getItem(USER_ID);
   }
+
+  public getUserRoles(): string[] {
+    const user = this.getUser();
+    return user?.roles || [];
+  }
 }

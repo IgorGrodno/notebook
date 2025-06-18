@@ -6,7 +6,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Note } from '../../interfaces/note.interface';
-import { NoteService } from '../../services/noteService';
+import { NoteService } from '../../services/note.service';
 import { EditNote } from '../edit-note/edit-note';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -115,18 +115,24 @@ export class Notes {
       alert('Пожалуйста, заполните заголовок и текст заметки');
       return;
     }
-
     const note: Note = {
       id: 0,
       date: new Date().toISOString(),
       title: this.noteTitle,
       text: this.noteText,
     };
-
     this.noteService.addNote(note).subscribe({
       next: (response) => {
         this.noteTitle = '';
         this.noteText = '';
+        this.applyFilters();
+        const textarea = document.getElementById(
+          'growing-textarea'
+        ) as HTMLTextAreaElement;
+        if (textarea) {
+          textarea.style.height = 'auto';
+          textarea.style.height = '50px';
+        }
       },
       error: (error) => {
         console.error('Error adding note:', error);
@@ -148,6 +154,7 @@ export class Notes {
 
   resizeTextarea(event: Event): void {
     const textarea = event.target as HTMLTextAreaElement;
+    if (!textarea) return;
     textarea.style.height = 'auto';
     const newHeight = textarea.scrollHeight;
     const step = 50;

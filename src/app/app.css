@@ -161,3 +161,7 @@ app-notes {
 .logout:hover {
   cursor: pointer;
 }
+
+.margin {
+  height: 60px;
+}
