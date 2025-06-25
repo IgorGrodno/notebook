@@ -97,9 +97,9 @@ export class Notes {
       return;
     }
     if (note) {
-      note.style.textDecoration = 'line-through';
       this.noteService.deleteNote(noteId).subscribe(() => {
         console.log(`Note with ID ${noteId} deleted.`);
+        this.notes = this.notes.filter((note) => note.id !== noteId);
       });
     }
   }

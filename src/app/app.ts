@@ -16,26 +16,15 @@ import { StorageService } from './services/storage.service';
 export class App {
   protected title = 'notebook';
 
-  darkMode: boolean = false;
-
-  toggleTheme(darkMode: boolean) {
-    const classList = document.body.classList;
-    if (darkMode) {
-      classList.add('dark-theme');
-    } else {
-      classList.remove('dark-theme');
-    }
-  }
-
   router: Router = inject(Router);
   authService: AuthService = inject(AuthService);
   storageService: StorageService = inject(StorageService);
 
   isAuth!: boolean;
-  curentUser: User;
+  currentUser: User;
 
   constructor() {
-    this.curentUser = this.storageService.getUser();
+    this.currentUser = this.storageService.getUser();
     this.isAuth = this.storageService.isLoggedIn();
   }
 

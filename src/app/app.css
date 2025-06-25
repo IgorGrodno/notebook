@@ -148,12 +148,6 @@ app-notes {
   gap: 20px;
 }
 
-.leftHeaderItems {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
 .logout {
   user-select: none;
 }

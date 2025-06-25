@@ -1,18 +1,8 @@
 <main class="mainContainer themed-box">
   <header>
     <a href=""> <h1 class="mainTitle">Notebook</h1></a>
-    <a href="adminPage">adminPage</a>
-    <div class="curentUserItems">
-      <div class="logout" (click)="logOut()">logout</div>
-    </div>
-    <label class="switch">
-      <input
-        type="checkbox"
-        [(ngModel)]="darkMode"
-        (change)="toggleTheme(darkMode)"
-      />
-      <span class="slider round"></span>
-    </label>
+    <a href="adminPage" class="adminLink">Admin Page</a>
+    <div class="logout" (click)="logOut()">logout</div>
   </header>
   <router-outlet></router-outlet>
 </main>
